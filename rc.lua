@@ -1,10 +1,6 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
-local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
-local volumebar_widget = require("awesome-wm-widgets.volumebar-widget.volumebar")
-local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
-
 
 -- lain
 local lain = require("lain")
@@ -59,7 +55,7 @@ end
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "gnome-terminal"
+terminal = "x-terminal-emulator"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -596,13 +592,14 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- autostart
 awful.spawn.with_shell("steam -silent")
 awful.spawn.with_shell('element-desktop')
-awful.spawn.with_shell("nitrogen --restore")
 awful.spawn.with_shell('compton')
+awful.util.spawn_with_shell("xinput set-prop 17 'Device Enabled' 0")
+awful.util.spawn_with_shell("xinput --set-prop 12 'libinput Accel Profile Enabled' 0, 1")
+awful.util.spawn_with_shell("nitrogen --restore")
 
 --Keybind info for the super+s panel. put the actual keybinds in the global keybindings thing at line 255ish
     awful.key({ modkey },            "w",     function () awful.util.spawn("firefox") end,
               {description = "Launch Firefox", group = "launcher"})
     awful.key({ modkey },            "F4",     function () awful.util.spawn("xkill") end,
               {description = "run xkill", group = "launcher"})
-awful.util.spawn_with_shell("xinput set-prop 17 'Device Enabled' 0")
-awful.util.spawn_with_shell("xinput --set-prop 12 'libinput Accel Profile Enabled' 0, 1")
+
