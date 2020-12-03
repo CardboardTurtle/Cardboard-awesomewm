@@ -4,11 +4,12 @@ how to install
 1. install awesomewm
 2. make directory ~/.config/awesome
 3. put rc.lua in there
+
 done.
-for help understanding what keybindings are press super+s.
-thats it.
-not very fancy
-it does contain some of my wallpapers.
+
+for help press super+s.
+
+it does contain some of my wallpapers, you don't need to download that folder if you don't want to, its just eight megs of images.
 
 NOTE: at the bottom it disables some input things like trackpad and mouse acceleration for whatever is id 12 (the mouse in my case) just delete the xinput lines to disable.
 DEPENDENCIES:
