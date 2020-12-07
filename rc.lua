@@ -71,8 +71,8 @@ beautiful.useless_gap = "6"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.spiral,
     awful.layout.suit.tile,
+    awful.layout.suit.spiral,
     awful.layout.suit.floating,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
@@ -240,6 +240,7 @@ awful.screen.connect_for_each_screen(function(s)
             s.mylayoutbox,
         },
     }
+    
 end)
 -- }}}
 
@@ -256,6 +257,8 @@ globalkeys = gears.table.join(
      -- My Bindings
      awful.key({ modkey,  }, "F4", function () awful.util.spawn_with_shell("xkill") end),
      awful.key({ modkey,  }, "w", function() awful.util.spawn_with_shell("firefox") end),
+     awful.key({ modkey,  }, "e", function() awful.util.spawn_with_shell("pcmanfm-qt") end),
+     
 --awesome's bindings
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
@@ -280,9 +283,9 @@ globalkeys = gears.table.join(
     ),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "Down", function () awful.client.swap.byidx(  1)    end,
+    awful.key({ modkey, "Control"   }, "Tab", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "Up", function () awful.client.swap.byidx( -1)    end,
+    awful.key({ modkey, "Control"   }, "`", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
     awful.key({ modkey, "Control" }, "Down", function () awful.screen.focus_relative( 1) end,
               {description = "focus the next screen", group = "screen"}),
@@ -349,7 +352,7 @@ globalkeys = gears.table.join(
               end,
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
+    awful.key({ modkey,  "Shift" }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
 )
 
@@ -514,7 +517,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = false  }
+      }, properties = { titlebars_enabled = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -593,13 +596,17 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.spawn.with_shell("steam -silent")
 awful.spawn.with_shell('element-desktop')
 awful.spawn.with_shell('compton')
+awful.spawn.with_shell('pasystray')
 awful.util.spawn_with_shell("xinput set-prop 17 'Device Enabled' 0")
 awful.util.spawn_with_shell("xinput --set-prop 12 'libinput Accel Profile Enabled' 0, 1")
 awful.util.spawn_with_shell("nitrogen --restore")
 
---Keybind info for the super+s panel. put the actual keybinds in the global keybindings thing at line 255ish
+--Keybind info for the super+s panel. put the actual keybinds in the global keybindings thing at line 255ish (or just ctrlF to global)
     awful.key({ modkey },            "w",     function () awful.util.spawn("firefox") end,
               {description = "Launch Firefox", group = "launcher"})
     awful.key({ modkey },            "F4",     function () awful.util.spawn("xkill") end,
               {description = "run xkill", group = "launcher"})
+    awful.key({ modkey },            "e",     function () awful.util.spawn("pcmanfm-qt") end,
+              {description = "Launch pcmanfm", group = "launcher"})
+
 
