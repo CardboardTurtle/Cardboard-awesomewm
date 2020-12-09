@@ -29,4 +29,6 @@ xinput
 
 pasystray
 
+lain (https://github.com/lcpz/lain/wiki)
+
 if you don't want to install any of these dependencies, go to the botton of the config where --autostart is and delete the lines starting the program you don't want/have.
