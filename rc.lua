@@ -22,7 +22,6 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
 -- Load Debian menu entries
-local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 -- {{{ Error handling
@@ -73,11 +72,10 @@ beautiful.useless_gap = "6"
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.spiral,
-    awful.layout.suit.floating,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
-    -- awful.layout.suit.fair,
+    awful.layout.suit.fair,
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral.dwindle,
     -- awful.layout.suit.max,
@@ -87,6 +85,7 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
+    awful.layout.suit.floating,
 }
 -- }}}
 
@@ -109,25 +108,17 @@ if has_fdo then
         after =  { menu_terminal }
     })
 else
-    mymainmenu = awful.menu({
-        items = {
-                  menu_awesome,
-                  { "Debian", debian.menu.Debian_menu.Debian },
-                  menu_terminal,
-                }
-    })
+
 end
 
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -257,7 +248,7 @@ globalkeys = gears.table.join(
      -- My Bindings
      awful.key({ modkey,  }, "F4", function () awful.util.spawn_with_shell("xkill") end),
      awful.key({ modkey,  }, "w", function() awful.util.spawn_with_shell("firefox") end),
-     awful.key({ modkey,  }, "e", function() awful.util.spawn_with_shell("pcmanfm-qt") end),
+     awful.key({ modkey,  }, "e", function() awful.util.spawn_with_shell("pcmanfm") end),
      
 --awesome's bindings
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -337,9 +328,7 @@ globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
-    -- Rofi
-    awful.key({ modkey },            "r",     function () awful.util.spawn("rofi -show run") end,
-              {description = "Run Rofi", group = "launcher"}),
+
 
     awful.key({ modkey }, "x",
               function ()
@@ -352,7 +341,7 @@ globalkeys = gears.table.join(
               end,
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    awful.key({ modkey,  "Shift" }, "p", function() menubar.show() end,
+    awful.key({ modkey,  }, "r", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
 )
 
@@ -416,7 +405,7 @@ for i = 1, 9 do
                   end,
                   {description = "view tag #"..i, group = "tag"}),
         -- Toggle tag display.
-        awful.key({ modkey, "Control" }, "#" .. i + 9,
+        awful.key({ modkey, "Shift" }, "#" .. i + 9,
                   function ()
                       local screen = awful.screen.focused()
                       local tag = screen.tags[i]
@@ -426,7 +415,7 @@ for i = 1, 9 do
                   end,
                   {description = "toggle tag #" .. i, group = "tag"}),
         -- Move client to tag.
-        awful.key({ modkey, "Shift" }, "#" .. i + 9,
+        awful.key({ modkey, "Control" }, "#" .. i + 9,
                   function ()
                       if client.focus then
                           local tag = client.focus.screen.tags[i]
@@ -597,6 +586,7 @@ awful.spawn.with_shell("steam -silent")
 awful.spawn.with_shell('element-desktop')
 awful.spawn.with_shell('compton')
 awful.spawn.with_shell('pasystray')
+awful.spawn.with_shell('blueman-applet')
 awful.util.spawn_with_shell("xinput set-prop 17 'Device Enabled' 0")
 awful.util.spawn_with_shell("xinput --set-prop 12 'libinput Accel Profile Enabled' 0, 1")
 awful.util.spawn_with_shell("nitrogen --restore")
