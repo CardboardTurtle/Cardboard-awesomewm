@@ -247,7 +247,7 @@ root.buttons(gears.table.join(
 globalkeys = gears.table.join(
      -- My Bindings
      awful.key({ modkey,  }, "F4", function () awful.util.spawn_with_shell("xkill") end),
-     awful.key({ modkey,  }, "w", function() awful.util.spawn_with_shell("firefox") end),
+     awful.key({ modkey,  }, "w", function() awful.util.spawn_with_shell("brave") end),
      awful.key({ modkey,  }, "e", function() awful.util.spawn_with_shell("pcmanfm") end),
      
 --awesome's bindings
@@ -278,9 +278,9 @@ globalkeys = gears.table.join(
               {description = "swap with next client by index", group = "client"}),
     awful.key({ modkey, "Control"   }, "`", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
-    awful.key({ modkey, "Control" }, "Down", function () awful.screen.focus_relative( 1) end,
+    awful.key({ modkey, }, "Down", function () awful.screen.focus_relative( 1) end,
               {description = "focus the next screen", group = "screen"}),
-    awful.key({ modkey, "Control" }, "Up", function () awful.screen.focus_relative(-1) end,
+    awful.key({ modkey, }, "Up", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
         function ()
@@ -300,10 +300,10 @@ globalkeys = gears.table.join(
               {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkey,           }, "=",     function () awful.tag.incmwfact( 0.05)          end,
-              {description = "increase master width factor", group = "layout"}),
+              {description = "increase master width factor", group = "client"}),
     awful.key({ modkey,           }, "-",     function () awful.tag.incmwfact(-0.05)          end,
-              {description = "decrease master width factor", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "Right",     function () awful.tag.incnmaster( 1, nil, true) end,
+              {description = "decrease master width factor", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "Left",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "Right",     function () awful.tag.incnmaster(-1, nil, true) end,
               {description = "decrease the number of master clients", group = "layout"}),
@@ -354,11 +354,11 @@ clientkeys = gears.table.join(
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ modkey,    }, "c",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
+    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle,
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
+    awful.key({ modkey, "Control" }, "Up",      function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
@@ -462,7 +462,7 @@ root.keys(globalkeys)
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = beautiful.border_width,
+      properties = { border_width = 2,
                      border_color = beautiful.border_normal,
                      focus = awful.client.focus.filter,
                      raise = true,
@@ -582,21 +582,12 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- THIS IS WHERE THE CUSTOM SHIT HAPPENS OK
 
 -- autostart
-awful.spawn.with_shell("steam -silent")
-awful.spawn.with_shell('element-desktop')
-awful.spawn.with_shell('compton')
-awful.spawn.with_shell('pasystray')
-awful.spawn.with_shell('blueman-applet')
-awful.util.spawn_with_shell("xinput set-prop 17 'Device Enabled' 0")
-awful.util.spawn_with_shell("xinput --set-prop 12 'libinput Accel Profile Enabled' 0, 1")
-awful.util.spawn_with_shell("nitrogen --restore")
+awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 
 --Keybind info for the super+s panel. put the actual keybinds in the global keybindings thing at line 255ish (or just ctrlF to global)
-    awful.key({ modkey },            "w",     function () awful.util.spawn("firefox") end,
+    awful.key({ modkey },            "w",     function () awful.util.spawn("brave") end,
               {description = "Launch Firefox", group = "launcher"})
     awful.key({ modkey },            "F4",     function () awful.util.spawn("xkill") end,
               {description = "run xkill", group = "launcher"})
     awful.key({ modkey },            "e",     function () awful.util.spawn("pcmanfm-qt") end,
               {description = "Launch pcmanfm", group = "launcher"})
-
-
