@@ -8,7 +8,7 @@ function run {
 }
 
 
-
+run xmodmap -e "keycode 94 = Super_L"
 run nm-applet
 run pasystray
 run steam

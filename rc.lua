@@ -253,9 +253,9 @@ globalkeys = gears.table.join(
 --awesome's bindings
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
+    awful.key({ modkey,           }, "h",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
+    awful.key({ modkey,           }, "l",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
@@ -278,9 +278,9 @@ globalkeys = gears.table.join(
               {description = "swap with next client by index", group = "client"}),
     awful.key({ modkey, "Control"   }, "`", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
-    awful.key({ modkey, }, "Down", function () awful.screen.focus_relative( 1) end,
+    awful.key({ modkey, }, "j", function () awful.screen.focus_relative( 1) end,
               {description = "focus the next screen", group = "screen"}),
-    awful.key({ modkey, }, "Up", function () awful.screen.focus_relative(-1) end,
+    awful.key({ modkey, }, "k", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
         function ()
@@ -303,13 +303,13 @@ globalkeys = gears.table.join(
               {description = "increase master width factor", group = "client"}),
     awful.key({ modkey,           }, "-",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "Left",     function () awful.tag.incnmaster( 1, nil, true) end,
+    awful.key({ modkey, "Shift"   }, "l",    function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "Right",     function () awful.tag.incnmaster(-1, nil, true) end,
+    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster(-1, nil, true) end,
               {description = "decrease the number of master clients", group = "layout"}),
-    awful.key({ modkey, "Control" }, "left",     function () awful.tag.incncol( 1, nil, true)    end,
+    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol( 1, nil, true)    end,
               {description = "increase the number of columns", group = "layout"}),
-    awful.key({ modkey, "Control" }, "right",     function () awful.tag.incncol(-1, nil, true)    end,
+    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
     awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
               {description = "select next", group = "layout"}),
@@ -358,8 +358,11 @@ clientkeys = gears.table.join(
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey, "Control" }, "Up",      function (c) c:move_to_screen()               end,
-              {description = "move to screen", group = "client"}),
+    awful.key({ modkey, "Control" }, "j",      function (c) c:move_to_screen(c.screen.index+1)               end,
+              {description = "move to next screen", group = "client"}),
+    awful.key({ modkey, "Control" }, "k",      function (c) c:move_to_screen(c.screen.index-1)               end,
+              {description = "move to previous screen", group = "client"}),
+
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
     awful.key({ modkey,           }, "n",
@@ -586,8 +589,8 @@ awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 
 --Keybind info for the super+s panel. put the actual keybinds in the global keybindings thing at line 255ish (or just ctrlF to global)
     awful.key({ modkey },            "w",     function () awful.util.spawn("brave") end,
-              {description = "Launch Firefox", group = "launcher"})
+              {description = "Launch Brave", group = "launcher"})
     awful.key({ modkey },            "F4",     function () awful.util.spawn("xkill") end,
               {description = "run xkill", group = "launcher"})
-    awful.key({ modkey },            "e",     function () awful.util.spawn("pcmanfm-qt") end,
+    awful.key({ modkey },            "e",     function () awful.util.spawn("pcmanfm") end,
               {description = "Launch pcmanfm", group = "launcher"})
