@@ -245,11 +245,12 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-     -- My Bindings
+--my bindings
+
      awful.key({ modkey,  }, "F4", function () awful.util.spawn_with_shell("xkill") end),
      awful.key({ modkey,  }, "w", function() awful.util.spawn_with_shell("brave") end),
      awful.key({ modkey,  }, "e", function() awful.util.spawn_with_shell("pcmanfm") end),
-     
+
 --awesome's bindings
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
@@ -259,7 +260,6 @@ globalkeys = gears.table.join(
               {description = "view next", group = "tag"}),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
-
     awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.byidx( 1)
@@ -341,7 +341,7 @@ globalkeys = gears.table.join(
               end,
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    awful.key({ modkey,  }, "r", function() menubar.show() end,
+    awful.key({ modkey,  }, ";", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
 )
 
@@ -586,6 +586,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- autostart
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
+
 
 --Keybind info for the super+s panel. put the actual keybinds in the global keybindings thing at line 255ish (or just ctrlF to global)
     awful.key({ modkey },            "w",     function () awful.util.spawn("brave") end,
