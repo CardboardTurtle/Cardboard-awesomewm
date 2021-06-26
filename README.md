@@ -1,7 +1,6 @@
 # Cardboard-awesomewm
 awesome config
 
-it does contain some of my wallpapers, you don't need to download that folder if you don't want to, its just eight megs of various images.
 
 I can't remember if I used lain or not so if things are broken probably a good idea to install it
 lain (https://github.com/lcpz/lain/wiki)
