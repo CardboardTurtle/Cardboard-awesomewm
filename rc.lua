@@ -247,8 +247,8 @@ root.buttons(gears.table.join(
 globalkeys = gears.table.join(
 --my bindings
 
+     awful.key({ modkey,  }, "w", function() awful.util.spawn_with_shell("brave-browser") end),
      awful.key({ modkey,  }, "F4", function () awful.util.spawn_with_shell("xkill") end),
-     awful.key({ modkey,  }, "w", function() awful.util.spawn_with_shell("brave") end),
      awful.key({ modkey,  }, "e", function() awful.util.spawn_with_shell("pcmanfm") end),
 
 --awesome's bindings
@@ -328,18 +328,6 @@ globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
-
-
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey,  }, ";", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
@@ -589,9 +577,9 @@ awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 
 
 --Keybind info for the super+s panel. put the actual keybinds in the global keybindings thing at line 255ish (or just ctrlF to global)
-    awful.key({ modkey },            "w",     function () awful.util.spawn("brave") end,
+    awful.key({ modkey },            "w",     function () awful.util.spawn("brave-browser") end,
               {description = "Launch Brave", group = "launcher"})
     awful.key({ modkey },            "F4",     function () awful.util.spawn("xkill") end,
               {description = "run xkill", group = "launcher"})
-    awful.key({ modkey },            "e",     function () awful.util.spawn("pcmanfm") end,
-              {description = "Launch pcmanfm", group = "launcher"})
+    awful.key({ modkey },            "e",     function () awful.util.spawn("nautilus") end,
+              {description = "Launch nautilus", group = "launcher"})
